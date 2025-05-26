@@ -98,6 +98,7 @@ async function uploadPendingFiles() {
 onMounted(() => {
   tinymce.init({
     target: document.getElementById(props.elementId),
+    license_key: 'gpl',
     plugins: 'link table code lists image media autoresize',
     toolbar:
       'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | customInsertButton | code',
