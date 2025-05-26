@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\UserRole;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +15,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        UserRole::factory()->create([
+            'name' => 'Admin',
         ]);
+
+        User::create([
+            'firstname' => 'Paulino',
+            'lastname' => 'Admin',
+            'email' => 'paulinopjc@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('26676712'),
+            'remember_token' => Str::random(10),
+            'role_id' => 1
+        ]);
+
+        UserRole::factory(10)->create();
+        User::factory(30)->create();
+
     }
 }

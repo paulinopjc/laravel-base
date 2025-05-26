@@ -18,9 +18,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'email',
+        'role_id',
         'password',
+        'role_id',
     ];
 
     /**
@@ -46,6 +49,14 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Relationship: User belongs to Role
+     */
+    public function role()
+    {
+        return $this->belongsTo(UserRole::class, 'role_id');
+    }
+
     public function isAdmin(): bool
     {
         // Example 1: Check if user has a role column equal to 'admin'
@@ -56,4 +67,12 @@ class User extends Authenticatable
 
         // Modify this logic based on your app's roles system
     }
+
+    // In User model
+    public function getNameAttribute()
+    {
+        return "{$this->firstname} {$this->lastname}";
+    }
+
+    protected $appends = ['name'];
 }

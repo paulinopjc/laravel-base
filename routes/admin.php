@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserRoleController;
+use App\Http\Controllers\Admin\CMSPageController;
 use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
@@ -20,9 +23,21 @@ Route::middleware([RedirectIfAuthenticated::class])->group(function () {
         ->name('admin.password.email');
 });
 
-Route::middleware([AdminAuthenticate::class])->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])
-        ->name('admin.dashboard');
+Route::middleware([AdminAuthenticate::class])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('users', UserController::class)
+            ->middleware(['auth', 'verified'])
+            ->names('users');
+
+        Route::resource('user-roles', UserRoleController::class)
+            ->middleware(['auth', 'verified'])
+            ->names('user-roles');
+
+        Route::resource('cms-pages', CMSPageController::class)
+            ->middleware(['auth', 'verified'])
+            ->names('cms-pages');;
 });
 
 require __DIR__.'/settings.php';

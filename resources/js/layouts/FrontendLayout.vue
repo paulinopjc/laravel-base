@@ -1,25 +1,16 @@
-<template>
-    <div>
-        <header>
-            <nav>
-                <ul>
-                    <li><router-link to="/">Home</router-link></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <slot></slot>
-        </main>
-        <footer>
-            <p>&copy; 2023 Your Company</p>
-        </footer>
-    </div>
-</template>
-
 <script setup>
-import { computed } from 'vue';
+    import FrontendHeader from './partials/FrontendHeader.vue'
+    import FrontendFooter from './partials/FrontendFooter.vue'
 </script>
 
-<style scoped>
-/* Add your styles here */
-</style>
+<template>
+  <div class="min-h-screen flex flex-col">
+    <FrontendHeader />
+    
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <FrontendFooter />
+  </div>
+</template>
