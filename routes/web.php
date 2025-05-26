@@ -95,7 +95,7 @@ Route::post('/upload-editor-media', function (Request $request) {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/{cmsPage:slug}', [CmsPageController::class, 'show'])
+Route::get('/pages/{cmsPage:slug}', [CmsPageController::class, 'show'])
     ->where('cmsPage', '[A-Za-z0-9-_]+')
     ->name('cms.page');
 
