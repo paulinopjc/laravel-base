@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\CMSPageController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
@@ -37,7 +38,11 @@ Route::middleware([AdminAuthenticate::class])
 
         Route::resource('cms-pages', CMSPageController::class)
             ->middleware(['auth', 'verified'])
-            ->names('cms-pages');;
+            ->names('cms-pages');
+
+        Route::resource('menus', MenuController::class)
+            ->middleware(['auth', 'verified'])
+            ->names('menus');
 });
 
 require __DIR__.'/settings.php';

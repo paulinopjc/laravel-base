@@ -1,7 +1,7 @@
 <script setup>
     import FrontendHeader from './partials/FrontendHeader.vue'
     import FrontendFooter from './partials/FrontendFooter.vue'
-    import { Head } from '@inertiajs/vue3';
+    import { Head, usePage } from '@inertiajs/vue3';
 
     const props = defineProps({
         meta: {
@@ -16,6 +16,8 @@
             }),
         },
     });
+
+    const menus = usePage().props.frontendMenus;
 </script>
 
 <template>
@@ -39,7 +41,7 @@
         <!-- Replace with dynamic image if needed -->
         <!--<meta name="twitter:image" content="/default-og-image.jpg" />-->
     </Head>
-    <FrontendHeader />
+    <FrontendHeader :menus="menus" />
     
     <main class="flex-1">
       <slot />
