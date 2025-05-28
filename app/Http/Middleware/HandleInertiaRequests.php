@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 use App\Models\Menu;
+use App\Models\FooterLink;
+use Setting;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -53,6 +55,8 @@ class HandleInertiaRequests extends Middleware
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'frontendMenus' => fn () => Menu::with('children')->whereNull('parent_id')->orderBy('order')->get(),
+            'siteSettings' => fn () => Setting::all(),
+            'frontEndFooterLinks' => fn () => FooterLink::with('children')->whereNull('parent_id')->orderBy('order')->get(),
         ];
     }
 }

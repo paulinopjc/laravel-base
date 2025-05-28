@@ -18,6 +18,8 @@
     });
 
     const menus = usePage().props.frontendMenus;
+    const footerLinks = usePage().props.frontEndFooterLinks;
+    const siteSettings = usePage().props.siteSettings;
 </script>
 
 <template>
@@ -40,13 +42,13 @@
         <meta name="twitter:description" :content="meta.description" />
         <!-- Replace with dynamic image if needed -->
         <!--<meta name="twitter:image" content="/default-og-image.jpg" />-->
+        <link rel="icon" :href="siteSettings.favicon" type="image/x-icon" />
     </Head>
     <FrontendHeader :menus="menus" />
-    
     <main class="flex-1">
       <slot />
     </main>
 
-    <FrontendFooter />
+    <FrontendFooter :footerLinks="footerLinks" />
   </div>
 </template>

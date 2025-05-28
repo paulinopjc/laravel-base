@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\FooterLinkController;
+use App\Models\FooterLink;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -43,6 +45,10 @@ Route::middleware([AdminAuthenticate::class])
         Route::resource('menus', MenuController::class)
             ->middleware(['auth', 'verified'])
             ->names('menus');
+
+        Route::resource('footer-links', FooterLinkController::class)
+            ->middleware(['auth', 'verified'])
+            ->names('footer-links');
 });
 
 require __DIR__.'/settings.php';

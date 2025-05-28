@@ -67,8 +67,12 @@ class CMSPageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CMSPage $cmsPage)
+    public function show(CMSPage $cmsPage, $slug)
     {
+        if ($cmsPage->slug !== $slug) {
+            return redirect()->route('cms.page', ['cmsPage' => $cmsPage->id, 'slug' => $cmsPage->slug]);
+        }
+
         $page = CmsPage::where('slug', $cmsPage->slug)
             ->where('is_published', 1)
             ->first();

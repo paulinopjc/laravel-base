@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('site_logos', function (Blueprint $table) {
+        Schema::create('footer_links', function (Blueprint $table) {
             $table->id();
-            $table->string('type'); // desktop, mobile, favicon, apple-touch-icon, etc.
-            $table->string('path'); // path to the image
-            $table->string('alt_text')->nullable();
+            $table->string('name');
+            $table->string('url')->nullable();
+            $table->unsignedInteger('order')->default(0);
+            $table->foreignId('parent_id')->nullable()->constrained('menus')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('site_logos');
+        Schema::dropIfExists('footer_links');
     }
 };

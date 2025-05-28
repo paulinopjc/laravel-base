@@ -100,4 +100,14 @@ class SiteLogoController extends Controller
     {
         //
     }
+
+    public function getAssets(): JsonResponse
+    {
+        return response()->json([
+            'desktop_logo' => Setting::get('desktop_logo'),
+            'mobile_logo' => Setting::get('mobile_logo'),
+            'favicon' => Setting::get('favicon'),
+            'apple_touch_icon' => Setting::get('apple_touch_icon'),
+        ]);
+    }
 }
